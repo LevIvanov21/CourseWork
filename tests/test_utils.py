@@ -1,4 +1,3 @@
-import pytest
 from src.utils import *
 
 def test_get_executed_operations():
