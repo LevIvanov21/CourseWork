@@ -2,6 +2,8 @@ import json
 import re
 from datetime import datetime
 from config import *
+
+
 def load_json():
     """
     Открытие файла operations.json
@@ -10,6 +12,8 @@ def load_json():
     with open(operation, 'r', encoding="UTF-8") as file:
         json_user_operations = json.load(file)
     return json_user_operations
+
+
 def get_executed_operations(values):
     """
     Сортировка operations.json есть ли EXECUTTED
@@ -22,15 +26,18 @@ def get_executed_operations(values):
         elif value['state'] == 'EXECUTED':
             executed_operations.append(value)
     return executed_operations
+
+
 def sort_date_operations(operations):
     """
     Функция вывода последних 5 операций
-    :return:
     :return: list_operation
     """
     sort_list = sorted(operations, key=lambda x: datetime.strptime(x["date"], "%Y-%m-%dT%H:%M:%S.%f"), reverse=True)
     list_operation = sort_list[:5]
     return list_operation
+
+
 def change_date(date):
     """
     Функция форматирования даты, пример: 14.10.2018
@@ -43,6 +50,8 @@ def change_date(date):
         format_date = f"{sort_data:%d.%m.%Y}"
         date_operations.append(format_date)
     return date_operations
+
+
 def mask_card_number(card_numbers):
     """
     скрытие номера карты
@@ -61,6 +70,8 @@ def mask_card_number(card_numbers):
         mask_number = " ".join(number_card[3])
         card_number_operations.append(f"{' '.join(mask_card_copy)} {' '.join(list(number_card[0:3]))} {mask_number}")
     return card_number_operations
+
+
 def mask_amount_number(amount_numbers):
     """
     скрытие номера счета
